@@ -4,11 +4,18 @@ import morgan from 'morgan';
 import cors from 'cors';
 import routes from './routes/index.js';
 import { errorHandler, errorNotFound } from './middlewares/errorHandler.js';
+import path from 'path';
 
 const app = express();
 
 // Parsing & data handling
 app.use(express.json());
+// app.use(
+//   '/api/images/products',
+//   express.static(path.join(process.cwd(), 'uploads'), {
+//     maxAge: '7d',
+//   })
+// );
 
 // Security
 app.use(helmet());

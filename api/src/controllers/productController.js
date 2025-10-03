@@ -50,10 +50,16 @@ export const createNewProduct = async (req, res, next) => {
   try {
     const body = req.body;
 
+    // let fileName;
+    // if (req.file) {
+    //   fileName = req.file.filename;
+    // }
+
     const newProduct = await db
       .insert(productsTable)
       .values({
         ...body,
+        // imageUrl: fileName,
       })
       .returning();
 

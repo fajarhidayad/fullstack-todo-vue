@@ -140,6 +140,16 @@ watch(() => [props.product], () => {
           </FormItem>
         </FormField>
 
+        <!-- <FormField v-slot="{ componentField }" name="image">
+          <FormItem>
+            <FormLabel>Product image</FormLabel>
+            <FormControl>
+              <Input type="file" v-bind="componentField" />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        </FormField> -->
+
         <DialogFooter>
           <Button type="submit" form="createProductForm">
             Save changes

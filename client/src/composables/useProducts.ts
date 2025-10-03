@@ -1,8 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
-import { createProduct, deleteProduct, getProducts, updateProduct } from '@/api/products'
+import {
+  createProduct,
+  deleteProduct,
+  getProduct,
+  getProducts,
+  updateProduct,
+} from '@/api/products'
 import type { Product } from '@/types/types'
 
 const queryKey = ['products']
+
+export function useProductById(id: number) {
+  return useQuery<Product>({
+    queryKey,
+    queryFn: () => getProduct(id),
+  })
+}
 
 export function useProducts() {
   return useQuery<Product[]>({
@@ -26,7 +39,8 @@ export function useCreateProduct(props: Params) {
       props.onSuccessCallback()
     },
     onError: (err) => {
-      props.onFailCallback(err.message)
+      // @ts-ignore
+      props.onFailCallback(err.response.data.message)
     },
   })
 }
@@ -41,7 +55,8 @@ export function useUpdateProduct(props: Params) {
       props.onSuccessCallback()
     },
     onError: (err) => {
-      props.onFailCallback(err.message)
+      // @ts-ignore
+      props.onFailCallback(err.response.data.message)
     },
   })
 }
@@ -56,7 +71,8 @@ export function useDeleteProduct(props: Params) {
       props.onSuccessCallback()
     },
     onError: (err) => {
-      props.onFailCallback(err.message)
+      // @ts-ignore
+      props.onFailCallback(err.response.data.message)
     },
   })
 }

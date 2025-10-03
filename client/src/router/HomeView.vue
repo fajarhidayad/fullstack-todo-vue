@@ -3,9 +3,11 @@ import ProductCard from '@/components/ProductCard.vue';
 import ProductForm from '@/components/ProductForm.vue';
 import { useDeleteProduct, useProducts } from '@/composables/useProducts';
 import type { Product } from '@/types/types';
+import { Loader2Icon } from 'lucide-vue-next';
 import { ref, watch } from 'vue';
 import { toast } from 'vue-sonner';
-const { data: products } = useProducts()
+
+const { data: products, isLoading } = useProducts()
 
 const isModalOpen = ref(false)
 const product = ref<Product | null>(null)
@@ -37,7 +39,11 @@ watch(isModalOpen, (val) => {
     <div class="flex items-center justify-end">
       <ProductForm v-model:is-modal-open="isModalOpen" :product="product" />
     </div>
-    <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+
+    <div v-if="isLoading" class="flex-1 flex items-center justify-center">
+      <Loader2Icon class="animate-spin" />
+    </div>
+    <div v-else class="grid auto-rows-min gap-4 md:grid-cols-3">
       <ProductCard v-for="product in products" :key="product.id" :product="product"
         @@set-current-product="() => setProduct(product)" @@delete-product="() => deleteMutation.mutate(product.id)" />
     </div>

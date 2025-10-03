@@ -44,11 +44,11 @@ DATABASE_NAME=
 VITE_API_URL=http://localhost:4000
 ```
 
-Pastikan PORT api dan VITE_API_URL memiliki nilai yang sama
+Pastikan `PORT` api dan `VITE_API_URL` memiliki nilai yang sama
 
 ### 3. Setup Database
 
-Gunakan PostgreSQL (contoh Docker):
+Gunakan PostgreSQL:
 
 Buat database baru pada Database Postgres sesuai dengan nilai `.env` `DATABASE_NAME`
 Lalu menjalankan perintah migrasi

@@ -13,5 +13,6 @@ export const productsTable = pgTable('products', {
   description: text(),
   price: numeric({ mode: 'number' }).notNull(),
   stock: integer().notNull(),
+  // imageUrl: varchar({ length: 255 }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
