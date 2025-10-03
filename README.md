@@ -13,8 +13,8 @@
 ### 1. Clone & Install
 
 ```bash
-git clone <repo-url>
-cd <repo-folder>
+git clone https://github.com/fajarhidayad/fullstack-todo-vue
+cd fullstack-todo-vue
 
 # Frontend
 cd client && npm install && cd ..
@@ -22,8 +22,6 @@ cd client && npm install && cd ..
 # Backend
 cd api && npm install && cd ..
 ```
-
-````
 
 ### 2. Konfigurasi Environment
 
@@ -33,41 +31,31 @@ Salin file `.env.example` menjadi `.env` di masing-masing folder (`client` & `ap
 
 ```env
 PORT=4000
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=appdb
-DB_USER=appuser
-DB_PASS=apppass
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_HOST=
+DATABASE_PORT=
+DATABASE_NAME=
 ```
 
 **client/.env**
 
 ```env
-VITE_API_BASE_URL=http://localhost:4000
+VITE_API_URL=http://localhost:4000
 ```
+
+Pastikan PORT api dan VITE_API_URL memiliki nilai yang sama
 
 ### 3. Setup Database
 
 Gunakan PostgreSQL (contoh Docker):
 
-```yaml
-# docker-compose.yml
-version: '3.9'
-services:
-  db:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: appdb
-      POSTGRES_USER: appuser
-      POSTGRES_PASSWORD: apppass
-    ports:
-      - '5432:5432'
-```
-
-Jalankan:
+Buat database baru pada Database Postgres sesuai dengan nilai `.env` `DATABASE_NAME`
+Lalu menjalankan perintah migrasi
 
 ```bash
-docker compose up -d
+cd api
+npm run db:migrate
 ```
 
 ---
@@ -89,21 +77,3 @@ npm run dev   # http://localhost:5173
 ```
 
 ---
-
-## 📦 Production Build
-
-**Backend**
-
-```bash
-cd api
-npm run start
-```
-
-**Frontend**
-
-```bash
-cd client
-npm run build
-npm run preview
-```
-````
